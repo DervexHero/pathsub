@@ -1,0 +1,14 @@
+[package]
+name = "pathsub"
+version = "0.1.0"
+edition = "2021"
+authors = ["Dervex"]
+repository = "https://github.com/DervexHero/pathsub"
+description = "Subtract one path from another, returns subtraction difference not the relative path"
+keywords = ["path", "paths", "diff", "sub", "os"]
+categories = ["filesystem", "os"]
+license = "Apache-2.0"
+
+[lib]
+name = "pathsub"
+path = "src/lib.rs"
