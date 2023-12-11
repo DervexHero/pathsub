@@ -1,6 +1,6 @@
 # pathsub
 
-Subtract one path from another. Returns subtraction difference not the relative path, unlike [pathdiff](https://crates.io/crates/pathdiff).
+Subtract one path from another, yielding the subtraction difference rather than relative path, unlike [pathdiff](https://crates.io/crates/pathdiff)
 
 <div>
   <a href="https://crates.io/crates/pathsub"><img alt='Version badge' src='https://img.shields.io/crates/v/pathsub.svg'></a>
@@ -14,8 +14,8 @@ Subtract one path from another. Returns subtraction difference not the relative 
 use pathsub::sub_paths;
 use std::path::Path;
 
-let a = Path::new("foo/bar/baz");
+let a = Path::new("foo/bar");
 let b = Path::new("foo");
 
-sub_paths(a, b); // Some("bar/baz")
+sub_paths(a, b); // Some("bar")
 ```

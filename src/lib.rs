@@ -14,10 +14,10 @@
 //! use pathsub::sub_paths;
 //! use std::path::Path;
 //!
-//! let a = Path::new("foo/bar/baz");
+//! let a = Path::new("foo/bar");
 //! let b = Path::new("foo");
 //!
-//! sub_paths(a, b); // Some("bar/baz")
+//! sub_paths(a, b); // Some("bar")
 //! ```
 //! Made with <3 by Dervex
 
@@ -36,7 +36,7 @@ use std::path::{Path, PathBuf};
 ///
 /// assert_eq!(sub_paths(a, b), Some(PathBuf::from("bar")));
 /// assert_eq!(sub_paths(b, a), Some(PathBuf::from("")));
-/// assert_eq!(sub_paths(a, c), Some(PathBuf::from("foo/bar")));
+/// assert_eq!(sub_paths(a, c), None);
 /// assert_eq!(sub_paths(a, &d), None);
 /// ```
 pub fn sub_paths(path: &Path, other: &Path) -> Option<PathBuf> {
@@ -52,12 +52,11 @@ pub fn sub_paths(path: &Path, other: &Path) -> Option<PathBuf> {
 		match (a_comps.next(), b_comps.next()) {
 			(Some(a), Some(b)) => {
 				if a != b {
-					output.push(a);
+					return None;
 				}
 			}
 			(Some(a), None) => output.push(a),
-			(None, Some(_)) => break,
-			(None, None) => break,
+			_ => break,
 		}
 	}
 
@@ -80,7 +79,7 @@ mod tests {
 
 		assert_eq!(sub_paths(&a, &b), Some(PathBuf::from("bar")));
 		assert_eq!(sub_paths(&b, &a), Some(PathBuf::from("")));
-		assert_eq!(sub_paths(&a, &c), Some(PathBuf::from("foo/bar")));
+		assert_eq!(sub_paths(&a, &c), None);
 		assert_eq!(sub_paths(&a, d), None);
 	}
 
@@ -93,7 +92,7 @@ mod tests {
 
 		assert_eq!(sub_paths(a, b), Some(PathBuf::from("bar")));
 		assert_eq!(sub_paths(b, a), Some(PathBuf::from("")));
-		assert_eq!(sub_paths(a, c), Some(PathBuf::from("foo/bar")));
+		assert_eq!(sub_paths(a, c), None);
 		assert_eq!(sub_paths(a, &d), None);
 	}
 
@@ -101,7 +100,10 @@ mod tests {
 	fn empty() {
 		let a = Path::new("");
 		let b = Path::new("");
+		let c = Path::new("foo");
 
 		assert_eq!(sub_paths(a, b), Some(PathBuf::from("")));
+		assert_eq!(sub_paths(a, c), Some(PathBuf::from("")));
+		assert_eq!(sub_paths(c, a), Some(PathBuf::from("foo")));
 	}
 }
