@@ -6,6 +6,7 @@ Subtract one path from another, yielding the subtraction difference rather than 
   <a href="https://crates.io/crates/pathsub"><img alt='Version badge' src='https://img.shields.io/crates/v/pathsub.svg'></a>
   <a href="https://crates.io/crates/pathsub"><img alt='Downloads badge' src='https://img.shields.io/crates/d/pathsub.svg'></a>
   <a href="https://crates.io/crates/pathsub"><img alt='License badge' src='https://img.shields.io/crates/l/pathsub.svg'></a>
+  <a href="https://docs.rs/pathsub"><img alt="Docs badge" src="https://img.shields.io/docsrs/pathsub"></a>
 </div>
 
 ## Example:
